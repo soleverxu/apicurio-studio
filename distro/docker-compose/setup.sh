@@ -1,19 +1,26 @@
 #!/bin/bash
 
-if [ -z "$1" ] || [ -z "$2" ]
+if [ -f ".setup.env" ]; then
+  set -a
+  source ".setup.env"
+  set +a
+fi
+
+HOST_IP=${1:-$APICURIO_STUDIO_HOSTNAME_OR_IP}
+DB_TYPE=${2:-$APICURIO_STUDIO_DATABASE_TYPE}
+
+if [ -z "$HOST_IP" ] || [ -z "$DB_TYPE" ]
 then
-  echo "Please provide the neccessary arguments!"
+  echo "Please provide the neccessary arguments! First shall be host_ip and second shall be DB type!"
   exit 1
 fi
 
-if [ "$2" != "mysql" ] && [ "$2" != "postgresql" ]
+if [ "$DB_TYPE" != "mysql" ] && [ "$DB_TYPE" != "postgresql" ]
 then
   echo "DB type must be mysql or postgresql"
   exit
 fi
 
-HOST_IP=$1
-DB_TYPE=$2
 P=$(pwd)
 
 ##if the script runs in the container, we have to adjust the path to the mount point

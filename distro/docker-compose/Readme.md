@@ -148,7 +148,7 @@ A few changes are made to apply additional settings before running setup:
 - Config your own initial Keycloak password instead of generating random one.
 - Config local GitHub (GHE) and/or local GitLab as default GitHub/GitLab linking providers. For more information, check out the [apicurio-keycloak-extensions](https://github.com/soleverxu/apicurio-keycloak-extensions).
 
-All the additional settings can only be set via environment variables:
+All the additional settings can only be set via the following environment variables:
 
 | Environment Variable | Sample | Description | Default |
 | ---- | ---- | ---- | ---- |
@@ -163,3 +163,14 @@ All the additional settings can only be set via environment variables:
 | APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL | `https://ghe.domain.com` | The local GitHub (GHE) base url to replace the default one. | `https://github.com` |
 | APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL | `https://ghe.domain.com/api/v3` | The local GitHub (GHE) API url to replace the default one. | `https://api.github.com` |
 | APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL | `https://gitlab.domain.com` | The local GitLab url to replace the default one. | `https://gitlab.com` |
+| APICURIO_STUDIO_HOSTNAME_OR_IP | `as.example.com` | The hostname or IP address that Apicurio Studio serves on. The first argument specified in the command line takes precedence over this environment variable. | _empty_ |
+| APICURIO_STUDIO_DATABASE_TYPE | `mysql` | The database type Apicurio Studio shall use, either `mysql` or `postgresql`. The second argument specified in the command line takes precedence over this environment variable. | _empty_ |
+
+You can also create the `.setup.env` file with the above settings. The setup script will load this file at the beginning.
+
+```env
+APICURIO_STUDIO_HOSTNAME_OR_IP=as.example.com
+APICURIO_STUDIO_DATABASE_TYPE=mysql
+APICURIO_STUDIO_KEYCLOAK_PUBLISH_PORT=11223
+APICURIO_STUDIO_UI_PUBLISH_PORT=12222
+```
