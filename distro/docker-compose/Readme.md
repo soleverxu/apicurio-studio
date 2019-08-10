@@ -138,3 +138,28 @@ Select Apicurio realm and add a user to it. After this, you have to do this with
 
 Apicurio URL: `http://YOUR_IP:8093`
 Microcks URL: `http://YOUR_IP:8900`
+
+## Additional Settings
+
+A few changes are made to apply additional settings before running setup:
+
+- Use `nginx` as reverse proxy in front of the Keycloak which allows visiting Keycloak from non local/private networks.
+- Config your own public ports rather than the default ones: 8090, 8091, 8092, 8093, 8900.
+- Config your own initial Keycloak password instead of generating random one.
+- Config local GitHub (GHE) and/or local GitLab as default GitHub/GitLab linking providers. For more information, check out the [apicurio-keycloak-extensions](https://github.com/soleverxu/apicurio-keycloak-extensions).
+
+All the additional settings can only be set via environment variables:
+
+| Environment Variable | Sample | Description | Default |
+| ---- | ---- | ---- | ---- |
+| APICURIO_STUDIO_KEYCLOAK_INIT_PASSWORD | `abc123` | Use your password during the setup instead of generating random one. You shall use the username `admin` with this password while loggin to the Keycloak. | _random_ |
+| APICURIO_STUDIO_KEYCLOAK_LOCAL_EXPOSE_PORT | `12345` | Since the nginx is used as reverse proxy in front of Keycloak, the Keycloak is required to be exposed with `127.0.0.1:port`. This local expose port is the one exposed to localhost only. | `8089` |
+| APICURIO_STUDIO_KEYCLOAK_PUBLISH_PORT | `12001` | Your specific port of Keycloak component published in the network. | `8090` |
+| APICURIO_STUDIO_API_PUBLISH_PORT | `12002` | Your specific port of Apicurio Studio API component published in the network. | `8091` |
+| APICURIO_STUDIO_WS_PUBLISH_PORT | `12003` | Your specific port of Apicurio Studio WebSocket (WS) component published in the network. | `8092` |
+| APICURIO_STUDIO_UI_PUBLISH_PORT | `12004` | Your specific port of Apicurio Studio UI component published in the network. | `8093` |
+| APICURIO_STUDIO_MICROCKS_PUBLISH_PORT | `12005` | Your specific port of Microcks component published in the network. | `8900` |
+| APICURIO_STUDIO_KEYCLOAK_EXTENSION_SOCIAL_SNAPSHOT_URL | `https://example.com/keycloak-ext/snapshot.jar` | The Keycloak extension jar file to be installed with Keycloak to enable local GitHub (GHE) and local GitLab. For more information, check out the [apicurio-keycloak-extensions](https://github.com/soleverxu/apicurio-keycloak-extensions). | `https://github.com/soleverxu/apicurio-keycloak-extensions/releases/download/social-6.0.0-SNAPSHOT/apicurio-keycloak-extensions-social-6.0.0-SNAPSHOT.jar` |
+| APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL | `https://ghe.domain.com` | The local GitHub (GHE) base url to replace the default one. | `https://github.com` |
+| APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL | `https://ghe.domain.com/api/v3` | The local GitHub (GHE) API url to replace the default one. | `https://api.github.com` |
+| APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL | `https://gitlab.domain.com` | The local GitLab url to replace the default one. | `https://gitlab.com` |

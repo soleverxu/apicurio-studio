@@ -8,7 +8,7 @@ services:
     image: 'apicurio/apicurio-studio-ws:${APICURIO_WS_VERSION}'
     depends_on: [apicurio-studio-db]
     ports:
-      - '8092:8080'
+      - "${WS_APICURIO_PORT}:8080"
     environment:
       JAVA_TOOL_OPTIONS: '-Djava.net.preferIPv4Stack=true'
 
@@ -24,7 +24,7 @@ services:
     image: 'apicurio/apicurio-studio-api:${APICURIO_API_VERSION}'
     depends_on: [apicurio-studio-db, apicurio-studio-ws]
     ports:
-      - '8091:8080'
+      - "${API_APICURIO_PORT}:8080"
     environment:
       JAVA_TOOL_OPTIONS: '-Djava.net.preferIPv4Stack=true'
 
@@ -50,7 +50,7 @@ services:
     image: 'apicurio/apicurio-studio-ui:${APICURIO_UI_VERSION}'
     depends_on: [apicurio-studio-db, apicurio-studio-api, apicurio-studio-ws]
     ports:
-      - '8093:8080'
+      - "${UI_APICURIO_PORT}:8080"
     environment:
       JAVA_TOOL_OPTIONS: '-Djava.net.preferIPv4Stack=true'
 
