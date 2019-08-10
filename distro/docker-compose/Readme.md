@@ -174,3 +174,14 @@ APICURIO_STUDIO_DATABASE_TYPE=mysql
 APICURIO_STUDIO_KEYCLOAK_PUBLISH_PORT=11223
 APICURIO_STUDIO_UI_PUBLISH_PORT=12222
 ```
+
+### Start, Restart and Stop
+To start Apicurio Studio, run start-xxx-environment.sh.
+
+To restart Apicurio Studio, run [restart.sh](restart.sh). This requires start Apicurio Studio first. It will first stop all running containers and then start these containers again. The stored data is still in the database.
+
+To stop (terminate) Apicurio Studio, run [stop.sh](stop.sh). 
+
+> **PAY ATTENTION!**
+>
+> **ALL DOCKER CONTAINERS ARE REMOVED! DATA STORED IN DATABASE WILL BE LOST TOO!**

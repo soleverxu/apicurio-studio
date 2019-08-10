@@ -91,15 +91,9 @@ sed 's/$MR_PORT_PUB/'"$MR_PORT"'/g' $P/config/keycloak/microcks-realm.json > $P/
 sed 's/$KEYCLOAK_PUB_PORT/'"$KC_PORT"'/g' $P/nginx/nginx.conf.template > $P/nginx/nginx.conf
 sed 's/$KEYCLOAK_LOCAL_PORT/'"$KC_PORT_LOCAL"'/g' $P/nginx/nginx.conf > $P/tmp4; mv $P/tmp4 $P/nginx/nginx.conf
 
-echo "Keycloak username: admin"
-echo "Keycloak password: $KC_PASSWORD"
-echo ""
-echo "Keycloak URL: $HOST_IP:$KC_PORT"
-echo "Apicurio URL: $HOST_IP:$ASUI_PORT"
-echo "Microcks URL: $HOST_IP:$MR_PORT"
-
 # apicurio studio keycloak extension for local github
 # download keycloak extension for social snapshot (local github & gitlab)
+echo "Downloading Keycloak extension, it may take a few seconds ..."
 kc_ext_social_snapshot="https://github.com/soleverxu/apicurio-keycloak-extensions/releases/download/social-6.0.0-SNAPSHOT/apicurio-keycloak-extensions-social-6.0.0-SNAPSHOT.jar"
 if [ -n "${APICURIO_STUDIO_KEYCLOAK_EXTENSION_SOCIAL_SNAPSHOT_URL}" ]; then
   kc_ext_social_snapshot="${APICURIO_STUDIO_KEYCLOAK_EXTENSION_SOCIAL_SNAPSHOT_URL}"
@@ -107,6 +101,15 @@ fi
 curl -sSL "$kc_ext_social_snapshot" -o "$P/keycloak/apicurio-keycloak-extensions-social-snapshot.jar"
 
 # set local GitHub/GitLab URL
-sed 's/$GITHUB_BASE_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL:-https://github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
-sed 's/$GITHUB_API_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL:-https://api.github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
-sed 's/$GITLAB_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL:-https://gitlab.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's/$GITHUB_BASE_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL:-https:\/\/github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's/$GITHUB_API_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL:-https:\/\/api.github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's/$GITLAB_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL:-https:\/\/gitlab.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+
+echo ""
+echo "Keycloak username: admin"
+echo "Keycloak password: $KC_PASSWORD"
+echo ""
+echo "Keycloak URL: $HOST_IP:$KC_PORT"
+echo "Apicurio URL: $HOST_IP:$ASUI_PORT"
+echo "Microcks URL: $HOST_IP:$MR_PORT"
+
