@@ -101,9 +101,9 @@ fi
 curl -sSL "$kc_ext_social_snapshot" -o "$P/keycloak/apicurio-keycloak-extensions-social-snapshot.jar"
 
 # set local GitHub/GitLab URL
-sed 's/$GITHUB_BASE_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL:-https:\/\/github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
-sed 's/$GITHUB_API_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL:-https:\/\/api.github.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
-sed 's/$GITLAB_URL/'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL:-https:\/\/gitlab.com}"'/g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's#$GITHUB_BASE_URL#'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_BASE_URL:-https://github.com}"'#g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's#$GITHUB_API_URL#'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITHUB_API_URL:-https://api.github.com}"'#g' $P/.env > $P/tmp; mv $P/tmp $P/.env
+sed 's#$GITLAB_URL#'"${APICURIO_STUDIO_KEYCLOAK_LOCAL_GITLAB_URL:-https://gitlab.com}"'#g' $P/.env > $P/tmp; mv $P/tmp $P/.env
 
 echo ""
 echo "Keycloak username: admin"
